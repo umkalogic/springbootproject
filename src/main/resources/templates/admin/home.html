@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <title th:text="#{admin.page}"></title>
+</head>
+
+<body>
+<header class="container">
+
+    <div class="header-logo">
+        <a th:href="@{/admin/home}"><img src="/images/logo.png" class="logo"></a>
+        <a th:href="@{/admin/home/?lang=uk}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+        <a th:href="@{/admin/home/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+    </div>
+</header>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit" th:text="#{label.logout}"></button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px;">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:text="#{text.welcome} + ' '"></span><span th:utext="${userName}"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 th:text="#{users.list}"></h1>
+
+<!--        <a th:href = "@{/showNewUserForm}" class="btn btn-primary btn-sm mb-3" th:text="#{link.add.user}"></a>-->
+
+        <table class = "table table-bordered table-striped table-responsive-md table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th th:text="#{user.id}"></th>
+                <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=userName&sortDir=' + ${reverseSortDir}}"
+                       th:text="#{user.username}"></a>
+                </th>
+                <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}"
+                       th:text="#{user.lastname}"></a>
+                </th>
+                <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}"
+                    th:text="#{user.firstname}"></a>
+                </th>
+                <th th:text="#{user.middlename}"></th>
+                <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}"
+                    th:text="#{user.email}"></a>
+                </th>
+                <th th:text="#{label.actions}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${listUsers}">
+                <th th:text="${user.userId}"></th>
+                <td th:text="${user.userName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.middleName}"></td>
+                <td th:text="${user.email}"></td>
+                <th th:text="${user.isActive}"></th>
+                <td> <a th:href="@{/showFormForUserUpdate/{id}(id=${user.userId})}" class="btn btn-warning"
+                th:text="#{user.update}"></a>
+                     <a th:href="@{/showUserAccounts/{id}(id=${user.userId})}" class="btn btn-success"
+                     th:text="#{user.showFormForUserAccounts}"></a>
+                     <a th:href="@{/deactivateUser/{id}(id=${user.userId})}" class="btn btn-danger">Deactivate</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    <span th:label="#{table.totalrows}"></span> [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <form th:action="@{/admin/registration}" method="GET">-->
+<!--        <button class="btn btn-md btn-warning btn-block" type="Submit" th:text="#{label.gotoregisterpage}"></button>-->
+<!--    </form>-->
+</div>
+
+
+
+
+<script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{static/js/popper.min.js}"></script>
+<script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+</body>
+</html>
