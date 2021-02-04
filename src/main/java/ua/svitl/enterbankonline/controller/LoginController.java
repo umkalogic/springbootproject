@@ -39,7 +39,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping(value="/admin/home")
+    @GetMapping(value={"/admin/home", "/admin"})
     public String adminHome(Model model) {
         return findPaginated(1, "LastName", "asc", model);
     }
@@ -75,14 +75,8 @@ public class LoginController {
         return "admin/home";
     }
 
-    @GetMapping("/admin/home/showFormForUserUpdate/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
-        User user = userService.getUserId(id);
-        model.addAttribute("user", user);
-        return "admin/update_user";
-    }
 
-    @GetMapping(value="/user/home")
+    @GetMapping(value={"/user/home", "/user"})
     public ModelAndView userHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

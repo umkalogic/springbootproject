@@ -36,7 +36,7 @@ public class RegistrationController {
                                 Model model) {
         if(userService.findUserByUserName(user.getUserName()) != null) {
             bindingResult.rejectValue("userName", "error.message",
-                    "#{error.user}");
+                    "{error.user}");
             model.addAttribute("errorMessage", "The user already exists");
         }
         if (bindingResult.hasErrors()) {
@@ -48,7 +48,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/admin/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") @Valid User user) {
         userService.saveUser(user);
         return "redirect:/admin/home";
     }

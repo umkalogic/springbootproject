@@ -9,7 +9,10 @@ import ua.svitl.enterbankonline.model.Role;
 import ua.svitl.enterbankonline.model.User;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

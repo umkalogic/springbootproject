@@ -71,14 +71,14 @@
                 <td th:text="${user.middleName}"></td>
                 <td th:text="${#temporals.format(user.birthDate,'dd-MM-yyyy')}"></td>
                 <td th:text="${user.email}"></td>
-                <td th:if="${user.isActive}" th:text="#{user.enabled}"></td>
+                <td th:text="${user.isActive} ? #{user.enabled} : #{user.disabled}"></td>
                 <td>
-                    <a th:href="@{/admin/showUserAccounts/{id}(id=${user.userId})}" class="btn btn-success"
+                    <a th:href="@{/admin/home/showUserAccounts/{id}(id=${user.userId})}" class="btn btn-success"
                        th:text="#{user.showFormForUserAccounts}"></a>
                     <a th:href="@{/admin/home/showFormForUserUpdate/{id}(id=${user.userId})}" class="btn btn-warning"
                 th:text="#{user.update}"></a>
-                    <a th:if="${user.userName} != ${activeUserName}" th:text="#{user.deactivate}"
-                        th:href="@{/admin/deactivateUser/{id}(id=${user.userId})}"
+                    <a th:if="${user.userName} != ${activeUserName} and ${user.isActive}" th:text="#{user.deactivate}"
+                        th:href="@{/admin/home/deactivateUser/{id}(id=${user.userId})}"
                         class="btn btn-danger"></a>
                 </td>
             </tr>

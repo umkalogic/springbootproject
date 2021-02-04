@@ -105,7 +105,7 @@ REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire
 REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
                       is_active, password, secret_word, user_name)
 VALUES (4, 4234567890,  'Богдан', 'Юзеровський', 'Геннадійович', '1986-03-25 00-00-00', 'user3@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user3', 'user3');
+        0, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user3', 'user3');
 REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
      VALUES (4, 'BOHDANA VOLODARSKOHO, 23', '125', 'Kyiv', 1);
 REPLACE INTO `user_addresses` (user_id, address_id) VALUES (4, 4);

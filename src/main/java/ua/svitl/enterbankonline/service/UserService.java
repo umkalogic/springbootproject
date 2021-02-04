@@ -12,7 +12,7 @@ import ua.svitl.enterbankonline.model.User;
 import ua.svitl.enterbankonline.repository.RoleRepository;
 import ua.svitl.enterbankonline.repository.UserRepository;
 
-
+import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,19 +52,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
+    public User updateUser(final User userFromPost) {
+        User existingUser = userRepository.findUserByUserId(userFromPost.getUserId());
+        existingUser.setUserName(userFromPost.getUserName());
+        existingUser.setLastName(userFromPost.getLastName());
+        existingUser.setFirstName(userFromPost.getFirstName());
+        existingUser.setEmail(userFromPost.getEmail());
+        existingUser.setIsActive(userFromPost.getIsActive());
+        return userRepository.save(existingUser);
+    }
+
     public User getUserId(int id) {
         return userRepository.findUserByUserId(id);
     }
 
-    public User enableUser (User user) {
-        user.setIsActive(true);
-        return userRepository.save(user);
-    }
-
-    public User disableUser (User user) {
-        user.setIsActive(false);
-        return userRepository.save(user);
-    }
 
     public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
