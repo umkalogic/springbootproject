@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <title th:text="#{user.page}"></title></head>
+
+<body>
+<header class="container">
+
+    <div class="header-logo">
+        <a th:href="@{/user/home}"><img src="/images/logo.png" class="logo"></a>
+        <a th:href="@{/user/home/?lang=uk}" class="margin-left">
+            <img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+        <a th:href="@{/user/home/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+    </div>
+</header>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-block btn-dark" name="logout"
+                type="Submit" th:text="#{label.logout}"></button>
+    </form>
+
+    <div class="panel-group" style="margin-top:60px;">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+                <span th:utext="${userEmail}"></span>
+                <span th:utext="${userName}"></span>
+            </div>
+            <div class="panel-body">
+                <img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400"
+                     alt="Beer for user"/>
+            </div>
+            <p class="user-message-text text-center" th:utext="${userMessage}"></p>
+        </div>
+    </div>
+
+</div>
+
+<script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{static/js/popper.min.js}"></script>
+<script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+</body>
+</html>

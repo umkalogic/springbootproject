@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +18,6 @@ import ua.svitl.enterbankonline.service.UserService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -42,25 +40,28 @@ public class LoginController {
     }
 
     @GetMapping(value="/admin/home")
-    public String adminHome(@ModelAttribute("user") @Valid User user, Model model) {
-        return findPaginated(user, 1, "LastName", "asc", model);
+    public String adminHome(Model model) {
+        return findPaginated(1, "LastName", "asc", model);
     }
 
     @GetMapping("/admin/home/page/{pageNo}")
-    public String findPaginated(@Valid User user,
-                                @PathVariable(value = "pageNo") int pageNo,
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", user.getUserName() +
+                "[" + user.getEmail() + "], " +
+                user.getLastName() + " " +
+                user.getFirstName() + ".");
+        model.addAttribute("activeUserName", user.getUserName());
+
         int pageSize = ControllerConstants.PAGE_SIZE;
 
         Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<User> listUsers = page.getContent();
 
-        model.addAttribute("userName", user.getUserName() +
-                        "[" + user.getEmail() + "], " +
-                        user.getLastName() + " " +
-                        user.getFirstName() + ".");
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -70,24 +71,16 @@ public class LoginController {
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("listUsers", listUsers);
-        return ControllerConstants.ADMIN_HOME;
+
+        return "admin/home";
     }
 
-//    @GetMapping(value="/admin/home")
-//    public ModelAndView adminHome(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findUserByUserName(auth.getName());
-//        modelAndView.addObject("userName",
-//                "Welcome " + user.getUserName() +
-//                        "[" + user.getEmail() + "] " +
-//                        user.getLastName() + " " +
-//                        user.getFirstName());
-//        modelAndView.addObject("adminMessage",
-//                "Content Available Only for Users with Admin Role");
-//        modelAndView.setViewName(ControllerConstants.ADMIN_HOME);
-//        return modelAndView;
-//    }
+    @GetMapping("/admin/home/showFormForUserUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
+        User user = userService.getUserId(id);
+        model.addAttribute("user", user);
+        return "admin/update_user";
+    }
 
     @GetMapping(value="/user/home")
     public ModelAndView userHome(){
@@ -101,7 +94,7 @@ public class LoginController {
                 user.getFirstName());
         modelAndView.addObject("userMessage",
             "Content Available Only for Users with User Role");
-        modelAndView.setViewName(ControllerConstants.USER_HOME);
+        modelAndView.setViewName("user/home");
 
         return modelAndView;
     }
@@ -116,19 +109,19 @@ public class LoginController {
         boolean isUser = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals(ControllerConstants.USER_ROLE.ADMIN.toString())) {
+            if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 isAdmin = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals(ControllerConstants.USER_ROLE.USER.toString())) {
+            } else if (grantedAuthority.getAuthority().equals("USER")) {
                 isUser = true;
             }
         }
         if (isAdmin) {
-            return ControllerConstants.REDIRECT + ControllerConstants.ADMIN_HOME;
+            return "redirect:/admin/home";
         } else if (isUser) {
-            return ControllerConstants.REDIRECT + ControllerConstants.USER_HOME;
+            return "redirect:/user/home";
         } else {
-            return ControllerConstants.REDIRECT;
+            return "redirect:/";
         }
     }
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<title th:text="#{title.update.user}"></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/header.css}"/>
+
+</head>
+<body>
+    <header class="container-fluid">
+	    <div class="header-logo">
+		    <a th:href="@{/admin/home}"><img src="/images/logo.png" class="logo"></a>
+		    <a th:href="@{/admin/update_user/?lang=uk}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+		    <a th:href="@{/admin/update_user/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+	    </div>
+    </header>
+	<div class="container-fluid">
+		<h1 th:text="#{title.usermanagementsystem}"></h1>
+		<hr>
+		<h2 th:text="#{title.user.update}"></h2>
+
+		<div class = "container">
+		<form action="#" th:action="@{admin/update_user/saveUser}" th:object="${user}"
+			method="POST">
+			
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{userId}" />
+			<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+<!--			<input type="checkbox" th:field="*{isActive}" th:text="#{user.enabled}" class="form-control mb-4 col-4">-->
+			<button type="submit" class="btn btn-info col-2" th:text="#{user.update}"></button>
+		</form>
+		</div>
+		<hr>
+		
+		<a th:href = "@{/}"> Back to Employee List</a>
+	</div>
+</body>
+</html>

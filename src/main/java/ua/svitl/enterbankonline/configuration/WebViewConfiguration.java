@@ -14,6 +14,7 @@ public class WebViewConfiguration implements WebMvcConfigurer {
                     .addResourceLocations("classpath:/resources/static/bootstrap/");
             registry.addResourceHandler("/resources/static/js/**")
                     .addResourceLocations("classpath:/resources/static/js/");
+
         }
 
 }

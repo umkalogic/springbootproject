@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: svitl
+Build-Jdk: 1.8.0_271
+Implementation-Title: enter-bank-24-project
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: ua.svitl
+Main-Class: ${start-class}
+

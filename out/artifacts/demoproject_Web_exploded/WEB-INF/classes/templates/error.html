@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Form</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+</head>
+<body>
+<form th:action="@{/default}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit" th:text="#{info.returnback}"></button>
+</form>
+<div class="container fon">
+    <header class="container">
+        <div class="header-logo">
+            <a th:href="@{/error}"><img src="/images/logo.png" class="logo" alt="logo"></a>
+            <a th:href="@{/error/?lang=uk}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+            <a th:href="@{/error/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+        </div>
+    </header>
+</div>
+<div class="container">
+    <h1 th:text="#{error.occured}"></h1>
+    <p th:text="#{error.hasoccured}"></p>
+</div>
+
+<script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{static/js/popper.min.js}"></script>
+<script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+
+</body>
+</html>

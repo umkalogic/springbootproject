@@ -52,6 +52,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User getUserId(int id) {
+        return userRepository.findUserByUserId(id);
+    }
+
     public User enableUser (User user) {
         user.setIsActive(true);
         return userRepository.save(user);
@@ -68,6 +72,6 @@ public class UserService {
                 Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return this.userRepository.findAll(pageable);
+        return userRepository.findAll(pageable);
     }
 }
