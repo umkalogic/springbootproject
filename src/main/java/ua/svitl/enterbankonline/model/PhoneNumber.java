@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -27,7 +28,8 @@ public class PhoneNumber {
 
     @Basic
     @Column(name = "phone", nullable = false, length = 9, unique = true)
-    @NotEmpty(message = "*Please provide a phone number")
+    @UniqueElements(message = "{phone.number.unique}")
+    @NotEmpty(message = "{phone.number.not.empty}")
     private String phone;
 
     @Basic

@@ -20,11 +20,11 @@ public class Address {
     private int addressId;
 
     @Basic@Column(name = "city", nullable = false)
-    @NotEmpty(message = "*Please provide user's city of living")
+    @NotEmpty(message = "{city.of.living}")
     private String city;
 
     @Basic@Column(name = "address_line1", nullable = false)
-    @NotEmpty(message = "*Please provide user's adress")
+    @NotEmpty(message = "{users.address}")
     private String addressLine1;
 
     @Basic@Column(name = "address_line2")

@@ -31,14 +31,14 @@
     </div>
 
     <div class="container-fluid">
-        <h1 th:text="#{accounts.list}"></h1>
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" th:href="@{/user/home}" th:text="#{accounts.list}"></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/payments}" th:text="#{payments.list}"></a></li>
+        </ul>
 
         <table class = "table table-bordered table-striped table-responsive-md table-hover">
             <thead class="thead-dark">
             <tr>
-                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortField=bankAccountId&sortDir=' + ${reverseSortDir}}"
-                       th:text="#{account.id}"></a>
-                </th>
                 <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortField=bankAccountNumber&sortDir=' + ${reverseSortDir}}"
                        th:text="#{account.number}"></a>
                 </th>
@@ -54,14 +54,13 @@
             </thead>
             <tbody>
             <tr th:each="account : ${listBankAccounts}">
-                <td th:text="${account.bankAccountId}"></td>
                 <td th:text="${account.bankAccountNumber}"></td>
                 <td th:text="${account.accountType}"></td>
-                <td th:text="${account.accountAmount}"></td>
+                <td th:text="${account.accountAmount} + ' ' + ${account.currency}" style="text-align: right;"></td>
                 <td th:text="${account.isActive} ? #{account.enabled} : #{account.disabled}"></td>
                 <td>
                     <a th:href="@{/user/home/showAccountCreditCards/{id}(id=${account.bankAccountId})}" class="btn btn-success"
-                       th:text="#{user.showFormForUserAccounts}"></a>
+                       th:text="#{account.showAccountCreditCards}"></a>
                     <a th:href="@{/user/home/showFormForPayment/{id}(id=${account.bankAccountId})}" class="btn btn-warning"
                        th:text="#{account.payment}"></a>
                     <a th:if="${account.isActive}" th:text="#{account.disable}"
@@ -69,7 +68,7 @@
                        class="btn btn-danger"></a>
                     <a th:if="!${account.isActive}" th:text="#{account.enablerequest}"
                        th:href="@{/user/home/enableAccountRequest/{id}(id=${account.bankAccountId})}"
-                       class="btn btn-danger"></a>
+                       class="btn btn-secondary"></a>
                 </td>
             </tr>
             </tbody>

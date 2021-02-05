@@ -18,14 +18,16 @@ public class Payment {
     @Column(name = "payment_id")
     private int paymentId;
 
-    @Column(name = "payment_date", nullable = false)
+    @Column(name = "payment_date", nullable = false,
+        columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime paymentDate;
 
     @Basic@Column(name = "payment_amount", nullable = false, precision = 2)
-    @DecimalMin(value = "0.01", message = "*The payment sum must be at least 0.01")
+    @DecimalMin(value = "0.01", message = "{payment.payment.amount}")
     private BigDecimal paymentAmount;
 
-    @Basic@Column(name = "is_sent", nullable = false)
+    @Basic@Column(name = "is_sent", nullable = false,
+        columnDefinition = "tinyint default 0")
     private Boolean isSent;
 
     @ManyToOne

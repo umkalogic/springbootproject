@@ -30,13 +30,13 @@ public class User {
     private int userId;
 
     @Column(name = "user_name", nullable = false)
-    @Length(groups = BasicUserInfo.class, min = 4, message = "*Username must have at least 4 characters long")
-    @NotEmpty(groups = BasicUserInfo.class, message = "*Please provide username")
+    @Length(groups = BasicUserInfo.class, min = 4, message = "{user.user.name.min}")
+    @NotEmpty(groups = BasicUserInfo.class, message = "{user.user.name}")
     private String userName;
 
     @Column(name = "password", nullable = false)
-    @Length(groups = AdvancedUserInfo.class, min = 4, message = "*User password must be at least 4 characters long")
-    @NotEmpty(groups = AdvancedUserInfo.class, message = "*Please provide user password")
+    @Length(groups = AdvancedUserInfo.class, min = 4, message = "{user.password.min}")
+    @NotEmpty(groups = AdvancedUserInfo.class, message = "{user.password}")
     private String password;
 
     @Column(name = "is_active", columnDefinition = "tinyint default 1")
@@ -44,32 +44,32 @@ public class User {
 
     @Basic@Column(name = "id_number_tax_code", length = 10, nullable = false, unique = true,
             columnDefinition = "bigint(10)")
-    @Length(groups = AdvancedUserInfo.class, min = 10, message = "*Tax number must consist of 10 characters")
-    @NotNull(groups = AdvancedUserInfo.class, message = "*Please provide user's tax code")
+    @Length(groups = AdvancedUserInfo.class, min = 10, message = "{tax.number.min}")
+    @NotNull(groups = AdvancedUserInfo.class, message = "{tax.number.notnull}")
     private BigInteger idNumberTaxCode;
 
     @Basic@Column(name = "last_name", nullable = false)
-    @NotEmpty(groups = BasicUserInfo.class, message = "*Please provide user's last name")
+    @NotEmpty(groups = BasicUserInfo.class, message = "{user.last.name}")
     private String lastName;
 
     @Basic@Column(name = "first_name", nullable = false)
-    @NotEmpty(groups = BasicUserInfo.class, message = "*Please provide user's first name")
+    @NotEmpty(groups = BasicUserInfo.class, message = "{user.first.name}")
     private String firstName;
 
     @Basic@Column(name = "middle_name", columnDefinition = "varchar(255) default ' '")
     private String middleName;
 
     @Basic@Column(name = "email", nullable = false, unique = true)
-    @Email(groups = BasicUserInfo.class, message = "*Please provide a valid Email")
-    @NotEmpty(groups = BasicUserInfo.class, message = "*Please provide user's email")
+    @Email(groups = BasicUserInfo.class, message = "{valid.email}")
+    @NotEmpty(groups = BasicUserInfo.class, message = "{email.not.empty}")
     private String email;
 
     @Basic@Column(name = "birth_date", nullable = false)
-    @NotNull(groups = AdvancedUserInfo.class, message = "*Please provide user's birth date")
+    @NotNull(groups = AdvancedUserInfo.class, message = "{user.birth.date}")
     private LocalDateTime birthDate;
 
     @Basic@Column(name = "secret_word", nullable = false)
-    @NotEmpty(groups = AdvancedUserInfo.class, message = "*Please provide user's secret word")
+    @NotEmpty(groups = AdvancedUserInfo.class, message = "{user.secret.word}")
     private String secretWord;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,

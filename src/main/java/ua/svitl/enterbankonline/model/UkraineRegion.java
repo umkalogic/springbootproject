@@ -19,7 +19,7 @@ public class UkraineRegion {
     private int ukraineRegionId;
 
     @Basic@Column(name = "ukraine_region_name", nullable = false, unique = true)
-    @NotEmpty(message = "*Please provide name of the region")
+    @NotEmpty(message = "region.name")
     private String ukraineRegionName;
 
     @OneToMany(mappedBy = "regionByRegionId")

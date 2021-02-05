@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -26,7 +27,8 @@ public class BankAccount {
 
     @Basic@Column(name = "bank_account_number", unique = true, nullable = false, length = 14,
             columnDefinition = "bigint(14) default " + EntityConstants.DEFAULT_BANK_ACCOUNT + "")
-    @NotEmpty(message = "*Please provide bankAccountNumber as template 26_000_000_000_000L")
+    @UniqueElements(message = "{bank.account.unique}")
+    @NotEmpty(message = "{bank.account.number.format}")
     private BigInteger bankAccountNumber;
 
     @Basic@Column(name = "account_type", nullable = false,

@@ -23,7 +23,7 @@ public class CreditCard {
 
     @Basic@Column(name = "card_number", nullable = false, length = 16, unique = true,
         columnDefinition = "bigint(16)")
-    @NotEmpty(message = "*Please card number")
+    @NotEmpty(message = "{card.number.not.empty}")
     private BigInteger cardNumber;
 
     @Basic@Column(name = "issue_date", nullable = false,
@@ -43,7 +43,7 @@ public class CreditCard {
     private String cardName;
 
     @Basic@Column(name = "owner_name", nullable = false)
-    @NotEmpty(message = "*Please provide card owner full name")
+    @NotEmpty(message = "{card.owner.full.name}")
     private String ownerName;
 
     @Basic@Column(name = "cvc2", nullable = false, length = 3)

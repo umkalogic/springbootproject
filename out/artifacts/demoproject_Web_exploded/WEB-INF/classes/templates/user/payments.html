@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <title th:text="#{payments.list}"></title>
+</head>
+<body>
+<header class="container-fluid">
+    <div class="header-logo">
+        <a th:href="@{/user/home}"><img src="/images/logo.png" class="logo"></a>
+        <a th:href="@{/user/payments/?lang=uk}" class="margin-left">
+            <img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+        <a th:href="@{/user/payments/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-block btn-dark" name="logout" type="Submit" th:text="#{label.logout}"></button>
+    </form>
+
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/home}" th:text="#{accounts.list}"></a></li>
+            <li class="nav-item"><a class="nav-link active" th:href="@{/user/payments}" th:text="#{payments.list}"></a></li>
+        </ul>
+    </div>
+
+
+</div>
+
+<script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{static/js/popper.min.js}"></script>
+<script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+</body>
+</html>
