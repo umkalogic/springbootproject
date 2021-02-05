@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Enter Bank 24</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+
+</head>
+
+<body>
+<div class="container-fluid fon">
+<header class="container">
+    <div class="header-logo">
+        <a th:href="@{/}"><img src="/images/logo.png" class="logo"></a>
+        <a th:href="@{/?lang=uk}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+        <a th:href="@{/?lang=en}"><img src="/images/en.svg" alt="English" class="en"/></a>
+    </div>
+</header>
+
+<section class="container-fluid form-login">
+
+    <form th:action="@{/login}" method="POST" class="form">
+            <h1 th:text="#{text.welcome}" class="form-control"></h1>
+            <div class="form-group">
+                <input type="text" id="user_name" name="user_name" th:placeholder="#{label.login}"
+                   class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="password" th:placeholder="#{placeholder.password}"
+                 id="password" name="password" class="form-control"/>
+            </div>
+            <div class="form-group col-xs-4">
+                <button class="form-control btn btn-lg btn-primary btn-block btn-flat" name="Submit" value="default"
+                        type="Submit" th:text="Login"></button>
+            </div>
+            <div align="center" th:if="${param.error}">
+                <p style="font-size: 20px; color: #FF1C19;" th:text="#{label.wronguserorpassword}"></p>
+            </div>
+    </form>
+</section>
+
+
+</div>
+<script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{static/js/popper.min.js}"></script>
+<script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -50,7 +50,6 @@
 			<button type="submit" class="btn btn-info col-2" th:text="#{user.update}"></button>
 			<br>
 			<h2 th:if="${errorMessage}"><span class="text-danger" th:utext="#{error.message}"></span></h2>
-			<p>user - <span th:text="*{userName}"></span></p><p>active - <span th:text="${activeUserName}"></span></p>
 		</form>
 		</div>
 		<hr>

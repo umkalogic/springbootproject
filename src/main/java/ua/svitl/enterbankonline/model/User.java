@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import ua.svitl.enterbankonline.model.validation.groups.AdvancedUserInfo;
 import ua.svitl.enterbankonline.model.validation.groups.BasicUserInfo;
@@ -78,9 +76,8 @@ public class User {
             mappedBy = "userByUserId", orphanRemoval = true)
     private List<PassportData> userPassports = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "userByUserId", orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<BankAccount> userAccounts = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,

@@ -41,9 +41,11 @@ public class BankAccount {
             columnDefinition = "varchar(10) default '" + EntityConstants.DEFAULT_CURRENCY + "'")
     private String currency;
 
-    @Basic@Column(name = "is_active", nullable = false,
-             columnDefinition = "tinyint default 1")
+    @Basic@Column(name = "is_active", nullable = false, columnDefinition = "tinyint default 1")
     private Boolean isActive;
+
+    @Basic@Column(name = "enable_request", columnDefinition = "tinyint default 0")
+    private Boolean enableRequest;
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "bankAccountByBankAccountId", orphanRemoval = true)

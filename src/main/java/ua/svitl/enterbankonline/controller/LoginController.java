@@ -49,26 +49,15 @@ public class LoginController {
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        model.addAttribute("userName", user.getUserName() +
-                "[" + user.getEmail() + "], " +
-                user.getLastName() + " " +
-                user.getFirstName() + ".");
-        model.addAttribute("activeUserName", user.getUserName());
+        UserAccountManagementController.setActiveUserName(model, userService);
 
         int pageSize = ControllerConstants.PAGE_SIZE;
 
         Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<User> listUsers = page.getContent();
 
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
-
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        UserAccountManagementController.modelAddAttributes(pageNo, sortField, sortDir, model,
+                page.getTotalPages(), page.getTotalElements());
 
         model.addAttribute("listUsers", listUsers);
 
@@ -76,22 +65,22 @@ public class LoginController {
     }
 
 
-    @GetMapping(value={"/user/home", "/user"})
-    public ModelAndView userHome(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        modelAndView.addObject("userName",
-                "Welcome " + user.getUserName() +
-                        "[" + user.getEmail() + "] " +
-                user.getLastName() + " " +
-                user.getFirstName());
-        modelAndView.addObject("userMessage",
-            "Content Available Only for Users with User Role");
-        modelAndView.setViewName("user/home");
-
-        return modelAndView;
-    }
+//    @GetMapping(value={"/user/home", "/user"})
+//    public ModelAndView userHome(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userService.findUserByUserName(auth.getName());
+//        modelAndView.addObject("userName",
+//                "Welcome " + user.getUserName() +
+//                        "[" + user.getEmail() + "] " +
+//                user.getLastName() + " " +
+//                user.getFirstName());
+//        modelAndView.addObject("userMessage",
+//            "Content Available Only for Users with User Role");
+//        modelAndView.setViewName("user/home");
+//
+//        return modelAndView;
+//    }
 
     @GetMapping(value="/default")
     public String defaultAfterLogin(HttpServletRequest request,
