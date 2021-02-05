@@ -41,20 +41,20 @@
             <thead class="thead-dark">
             <tr>
                 <th th:text="#{user.id}"></th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=userName&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=username&sort_dir=' + ${reverseSortDir}}"
                        th:text="#{user.username}"></a>
                 </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=lastname&sort_dir=' + ${reverseSortDir}}"
                        th:text="#{user.lastname}"></a>
                 </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=firstname&sort_dir=' + ${reverseSortDir}}"
                     th:text="#{user.firstname}"></a>
                 </th>
                 <th th:text="#{user.middlename}"></th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=birthDate&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=birthdate&sort_dir=' + ${reverseSortDir}}"
                     th:text="#{user.birthdate}"></a>
                 </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=email&sort_dir=' + ${reverseSortDir}}"
                     th:text="#{user.email}"></a>
                 </th>
                 <th th:text="#{user.enabled}"></th>
@@ -93,20 +93,20 @@
                 <div class="pagination">
 					<span class = "page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
 						<a class="page-link" th:if="${currentPage != i}"
-                           th:href="@{'/admin/home/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                           th:href="@{'/admin/home/page/' + ${i}+ '?sort_field=' + ${sortField} + '&sort_dir=' + ${sortDir}}">[[${i}]]</a>
 						<span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
                 </div>
                 <div class = "page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/admin/home/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                       th:href="@{'/admin/home/page/' + ${currentPage + 1}+ '?sort_field=' + ${sort_field} + '&sort_dir=' + ${sortDir}}"
                        th:text="#{label.nextpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.nextpage}"></span>
                 </div>
 
                 <div class="page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/admin/home/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                       th:href="@{'/admin/home/page/' + ${totalPages}+ '?sort_field=' + ${sort_field} + '&sort_dir=' + ${sortDir}}"
                        th:text="#{label.lastpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.lastpage}">Last</span>
                 </div>

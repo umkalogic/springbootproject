@@ -30,7 +30,7 @@ public class UserManagementController {
         return new User();
     }
 
-    @GetMapping(value={"/admin/home/showFormForUserUpdate/{id}", "/admin/update_user/{id}"})
+    @GetMapping(value={"/admin/home/show_form_for_user_update/{id}", "/admin/update_user/{id}"})
     public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
         User user = userService.getUserId(id);
         model.addAttribute("user", user);
@@ -39,7 +39,7 @@ public class UserManagementController {
         return "admin/update_user";
     }
 
-    @PostMapping(value="/admin/update_user/saveUser")
+    @PostMapping(value="/admin/update_user/save_user")
     public String updateUser(@Validated(BasicUserInfo.class) @ModelAttribute("user") User user,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

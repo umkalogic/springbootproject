@@ -36,11 +36,6 @@ public class RegistrationController {
     public String createNewUser(@ModelAttribute("user") @Valid User user,
                                 BindingResult bindingResult,
                                 Model model) {
-        if(userService.findUserByUserName(user.getUserName()) != null) {
-            bindingResult.rejectValue("userName", "error.message",
-                    "{error.user}");
-            model.addAttribute("errorMessage", "The user already exists");
-        }
         if (bindingResult.hasErrors()) {
             return "admin/registration";
         }

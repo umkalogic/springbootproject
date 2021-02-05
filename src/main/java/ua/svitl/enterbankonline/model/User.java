@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.format.annotation.DateTimeFormat;
 import ua.svitl.enterbankonline.model.validation.groups.AdvancedUserInfo;
 import ua.svitl.enterbankonline.model.validation.groups.BasicUserInfo;
 
@@ -29,8 +31,9 @@ public class User {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     @Length(groups = BasicUserInfo.class, min = 4, message = "{user.user.name.min}")
+    @UniqueElements(groups = BasicUserInfo.class, message = "{user.name.unique}")
     @NotEmpty(groups = BasicUserInfo.class, message = "{user.user.name}")
     private String userName;
 
@@ -49,10 +52,12 @@ public class User {
     private BigInteger idNumberTaxCode;
 
     @Basic@Column(name = "last_name", nullable = false)
+    @Length(groups = BasicUserInfo.class, min = 2, message = "{user.user.last.name.min}")
     @NotEmpty(groups = BasicUserInfo.class, message = "{user.last.name}")
     private String lastName;
 
     @Basic@Column(name = "first_name", nullable = false)
+    @Length(groups = BasicUserInfo.class, min = 2, message = "{user.user.first.name.min}")
     @NotEmpty(groups = BasicUserInfo.class, message = "{user.first.name}")
     private String firstName;
 
@@ -65,10 +70,12 @@ public class User {
     private String email;
 
     @Basic@Column(name = "birth_date", nullable = false)
+    @DateTimeFormat
     @NotNull(groups = AdvancedUserInfo.class, message = "{user.birth.date}")
     private LocalDateTime birthDate;
 
     @Basic@Column(name = "secret_word", nullable = false)
+    @Length(groups = AdvancedUserInfo.class, min = 6, message = "{user.secret.word.min}")
     @NotEmpty(groups = AdvancedUserInfo.class, message = "{user.secret.word}")
     private String secretWord;
 

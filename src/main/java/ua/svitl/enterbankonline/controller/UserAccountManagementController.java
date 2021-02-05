@@ -36,10 +36,10 @@ public class UserAccountManagementController {
         return findPaginated(1, "BankAccountNumber", "asc", model);
     }
 
-    @GetMapping("/user/home/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    @GetMapping("/user/home/page/{pageno}")
+    public String findPaginated(@PathVariable(value = "pageno") int pageNo,
+                                @RequestParam("sort_field") String sortField,
+                                @RequestParam("sort_dir") String sortDir,
                                 Model model) {
         User user = setActiveUserName(model, userService);
         int pageSize = ControllerConstants.PAGE_SIZE;
@@ -65,9 +65,9 @@ public class UserAccountManagementController {
         return user;
     }
 
-    public static Model modelAddAttributes(@PathVariable("pageNo") int pageNo,
-                                   @RequestParam("sortField") String sortField,
-                                   @RequestParam("sortDir") String sortDir,
+    public static Model modelAddAttributes(@PathVariable("pageno") int pageNo,
+                                   @RequestParam("sort_field") String sortField,
+                                   @RequestParam("sort_dir") String sortDir,
                                    Model model,
                                    int totalPages,
                                    long totalElements) {

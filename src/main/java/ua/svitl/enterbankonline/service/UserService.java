@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.svitl.enterbankonline.model.Role;
@@ -33,7 +34,8 @@ public class UserService {
     }
 
     public User findUserByUserName(String userName) {
-        return userRepository.findUserByUserName(userName);
+        return userRepository.findUserByUserName(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     User findUserByIdNumberTaxCode(BigInteger taxNumber) {

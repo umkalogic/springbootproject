@@ -44,10 +44,10 @@ public class LoginController {
         return findPaginated(1, "LastName", "asc", model);
     }
 
-    @GetMapping("/admin/home/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    @GetMapping("/admin/home/page/{pageno}")
+    public String findPaginated(@PathVariable(value = "pageno") int pageNo,
+                                @RequestParam("sort_field") String sortField,
+                                @RequestParam("sort_dir") String sortDir,
                                 Model model) {
         UserAccountManagementController.setActiveUserName(model, userService);
 
@@ -63,24 +63,6 @@ public class LoginController {
 
         return "admin/home";
     }
-
-
-//    @GetMapping(value={"/user/home", "/user"})
-//    public ModelAndView userHome(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findUserByUserName(auth.getName());
-//        modelAndView.addObject("userName",
-//                "Welcome " + user.getUserName() +
-//                        "[" + user.getEmail() + "] " +
-//                user.getLastName() + " " +
-//                user.getFirstName());
-//        modelAndView.addObject("userMessage",
-//            "Content Available Only for Users with User Role");
-//        modelAndView.setViewName("user/home");
-//
-//        return modelAndView;
-//    }
 
     @GetMapping(value="/default")
     public String defaultAfterLogin(HttpServletRequest request,
