@@ -27,8 +27,7 @@ public class PhoneNumber {
     private String phoneCountryCode;
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 9, unique = true)
-    @UniqueElements(message = "{phone.number.unique}")
+    @Column(name = "phone", nullable = false, length = 9)
     @NotEmpty(message = "{phone.number.not.empty}")
     private String phone;
 
@@ -37,7 +36,7 @@ public class PhoneNumber {
     private boolean isPrimary;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    private User userByUserId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id", nullable = false)
+    private Person person;
 
 }

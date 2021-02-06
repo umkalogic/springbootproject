@@ -29,56 +29,57 @@
     </form>
 
     <div class="container-fluid" style="margin-top:40px;">
-        <span th:text="#{text.welcome} + ' '"></span><span th:utext="${userName}"></span>
+        <span th:text="#{text.welcome} + ' '"></span><span th:utext="${activeUserName}"></span>
     </div>
 
     <div class="container-fluid">
         <h1 th:text="#{users.list}"></h1>
 
-        <a th:href = "@{/showNewUserForm}" class="btn btn-success btn-sm mb-3" th:text="#{link.add.user}"></a>
-
         <table class = "table table-bordered table-striped table-responsive-md table-hover">
             <thead class="thead-dark">
             <tr>
                 <th th:text="#{user.id}"></th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=username&sort_dir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortfield=userName&sortdir=' + ${reverseSortDir}}"
                        th:text="#{user.username}"></a>
                 </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=lastname&sort_dir=' + ${reverseSortDir}}"
-                       th:text="#{user.lastname}"></a>
+                <th><a th:text="#{user.lastname}"></a>
                 </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sort_field=firstname&sort_dir=' + ${reverseSortDir}}"
-                    th:text="#{user.firstname}"></a>
+                <th><a th:text="#{user.firstname}"></a>
                 </th>
                 <th th:text="#{user.middlename}"></th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=birthdate&sort_dir=' + ${reverseSortDir}}"
-                    th:text="#{user.birthdate}"></a>
-                </th>
-                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortField=email&sort_dir=' + ${reverseSortDir}}"
+                <th th:text="#{user.birthdate}"></th>
+                <th><a th:href="@{'/admin/home/page/' + ${currentPage} + '?sortfield=email&sortdir=' + ${reverseSortDir}}"
                     th:text="#{user.email}"></a>
                 </th>
+                <th th:text="#{user.phonenumber}"></th>
                 <th th:text="#{user.enabled}"></th>
                 <th th:text="#{label.actions}"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${listUsers}">
-                <td th:text="${user.userId}"></td>
-                <td th:text="${user.userName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.middleName}"></td>
-                <td th:text="${#temporals.format(user.birthDate,'dd-MM-yyyy')}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.isActive} ? #{user.enabled} : #{user.disabled}"></td>
+            <tr th:each="userdata : ${listUserPersonData}">
+                <td th:text="${userdata.userId}"></td>
+                <td th:text="${userdata.userName}"></td>
+                <td th:text="${userdata.lastName}"></td>
+                <td th:text="${userdata.firstName}"></td>
+                <td th:text="${userdata.middleName}"></td>
+                <td th:text="${#temporals.format(userdata.birthDate,'dd-MM-yyyy')}"></td>
+                <td th:text="${userdata.userEmail}"></td>
+                <td th:text="${userdata.phoneCountryCode} + ' ' + ${userdata.phone}"></td>
+                <td th:text="${userdata.isActive} ? #{user.enabled} : #{user.disabled}"></td>
                 <td>
-                    <a th:href="@{/admin/home/showUserAccounts/{id}(id=${user.userId})}" class="btn btn-success"
+                    <a th:href="@{/admin/home/show_user_accounts/{id}(id=${userdata.userId})}" class="btn btn-success"
                        th:text="#{user.showFormForUserAccounts}"></a>
-                    <a th:href="@{/admin/home/showFormForUserUpdate/{id}(id=${user.userId})}" class="btn btn-warning"
+                    <a th:href="@{/admin/home/show_form_for_user_update/{id}(id=${userdata.userId})}" class="btn btn-warning"
                 th:text="#{user.update}"></a>
-                    <a th:if="${user.userName} != ${activeUserName} and ${user.isActive}" th:text="#{user.deactivate}"
-                        th:href="@{/admin/home/deactivateUser/{id}(id=${user.userId})}"
-                        class="btn btn-danger"></a>
+                    <a th:if="${userdata.isActive}" th:href="@{/admin/home/disable/{id}(id=${userdata.userId})}" class="btn btn-danger"
+                       th:text="#{user.deactivate}"
+                       th:data-confirm-delete="|#{message.delete}|"
+                       onclick="return confirm(this.getAttribute('data-confirm-delete'))"></a>
+                    <a th:if="!${userdata.isActive}" th:href="@{/admin/home/enable/{id}(id=${userdata.userId})}" class="btn btn-secondary"
+                       th:text="#{user.activate}"
+                       th:data-confirm-delete="|#{message.enable}|"
+                       onclick="return confirm(this.getAttribute('data-confirm-delete'))"></a>
                 </td>
             </tr>
             </tbody>
@@ -93,20 +94,20 @@
                 <div class="pagination">
 					<span class = "page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
 						<a class="page-link" th:if="${currentPage != i}"
-                           th:href="@{'/admin/home/page/' + ${i}+ '?sort_field=' + ${sortField} + '&sort_dir=' + ${sortDir}}">[[${i}]]</a>
+                           th:href="@{'/admin/home/page/' + ${i}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}">[[${i}]]</a>
 						<span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
                 </div>
                 <div class = "page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/admin/home/page/' + ${currentPage + 1}+ '?sort_field=' + ${sort_field} + '&sort_dir=' + ${sortDir}}"
+                       th:href="@{'/admin/home/page/' + ${currentPage + 1}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}"
                        th:text="#{label.nextpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.nextpage}"></span>
                 </div>
 
                 <div class="page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/admin/home/page/' + ${totalPages}+ '?sort_field=' + ${sort_field} + '&sort_dir=' + ${sortDir}}"
+                       th:href="@{'/admin/home/page/' + ${totalPages}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}"
                        th:text="#{label.lastpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.lastpage}">Last</span>
                 </div>
@@ -122,5 +123,6 @@
 <script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>
 <script th:src="@{static/js/popper.min.js}"></script>
 <script th:src="@{static/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{static/js/enabledisable.js}"></script>
 </body>
 </html>

@@ -27,7 +27,6 @@ public class BankAccount {
 
     @Basic@Column(name = "bank_account_number", unique = true, nullable = false, length = 14,
             columnDefinition = "bigint(14) default " + EntityConstants.DEFAULT_BANK_ACCOUNT + "")
-    @UniqueElements(message = "{bank.account.unique}")
     @NotEmpty(message = "{bank.account.number.format}")
     private BigInteger bankAccountNumber;
 
@@ -60,6 +59,6 @@ public class BankAccount {
     private List<CreditCard> bankAccountCreditCards = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    private User userByUserId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id", nullable = false)
+    private Person personByPersonId;
 }

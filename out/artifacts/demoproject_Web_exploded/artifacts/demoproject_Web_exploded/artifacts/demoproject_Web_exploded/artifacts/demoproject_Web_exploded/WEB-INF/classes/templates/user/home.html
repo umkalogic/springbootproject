@@ -27,7 +27,7 @@
     </form>
 
     <div class="container-fluid" style="margin-top:40px;">
-        <span th:text="#{text.welcome} + ' '"></span><span th:utext="${userName}"></span>
+        <span th:text="#{text.welcome} + ' '"></span><span th:utext="${activeUserName}"></span>
     </div>
 
     <div class="container-fluid">
@@ -35,17 +35,20 @@
             <li class="nav-item"><a class="nav-link active" th:href="@{/user/home}" th:text="#{accounts.list}"></a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/user/payments}" th:text="#{payments.list}"></a></li>
         </ul>
+        <hr>
+    </div>
 
+    <div class="container-fliud">
         <table class = "table table-bordered table-striped table-responsive-md table-hover">
             <thead class="thead-dark">
             <tr>
-                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortField=bankAccountNumber&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortfield=bankaccountnumber&sortdir=' + ${reverseSortDir}}"
                        th:text="#{account.number}"></a>
                 </th>
-                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortField=accountType&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortfield=accountype&sortdir=' + ${reverseSortDir}}"
                        th:text="#{account.type}"></a>
                 </th>
-                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortField=accountAmount&sortDir=' + ${reverseSortDir}}"
+                <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortfield=accountamount&sortdir=' + ${reverseSortDir}}"
                        th:text="#{account.amount}"></a>
                 </th>
                 <th th:text="#{account.enabled}"></th>
@@ -83,20 +86,20 @@
                 <div class="pagination">
 					<span class = "page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
 						<a class="page-link" th:if="${currentPage != i}"
-                           th:href="@{'/user/home/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                           th:href="@{'/user/home/page/' + ${i}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}">[[${i}]]</a>
 						<span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
                 </div>
                 <div class = "page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/user/home/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                       th:href="@{'/user/home/page/' + ${currentPage + 1}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}"
                        th:text="#{label.nextpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.nextpage}"></span>
                 </div>
 
                 <div class="page-item">
                     <a class="page-link" th:if="${currentPage < totalPages}"
-                       th:href="@{'/user/home/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                       th:href="@{'/user/home/page/' + ${totalPages}+ '?sortfield=' + ${sortField} + '&sortdir=' + ${sortDir}}"
                        th:text="#{label.lastpage}"></a>
                     <span class="page-link" th:unless="${currentPage < totalPages}" th:text="#{label.lastpage}">Last</span>
                 </div>

@@ -31,40 +31,38 @@ REPLACE INTO `ukraine_regions` VALUES (25, 'Чернівецька област�
 REPLACE INTO `ukraine_regions` VALUES (26, 'Чернігівська область');
 
 -- insert ADMIN info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (1, 1234567890,  'Андрій', 'Адмінський', 'Максимович', '1977-04-08 00-00-00', 'admin@enterbank.ua',
-        1, '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'admin12345', 'admin');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-      VALUES (1, 'PEREYASLIV VAL, 1D','24', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (1, 1);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (1, 1, '501010101', 1);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-      VALUES (1, '2015-08-08 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 252525, 'СО', 1);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-      VALUES (1, 53000.21, 26320130000001, 1);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (1, '1977-04-08 00-00-00', 'Андрій', 1234567890, 'Адмінський', 'Максимович', 'admin12345');
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (1, 'admin@enterbank.ua', 1, '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'admin', 1, 1);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+      VALUES (1, 'PEREYASLIV VAL, 1D','24', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id) VALUES (1, 1, '501010101', 1);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+      VALUES (1, 1, '2015-08-08 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 252525, 'СО', 1);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+      VALUES (1, 53000.21, 26320130000001, 1, 1);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
       VALUES (1, 'VISA', 1111222233334444, 111, '2021-08-08 00-00-00', 1, '2019-08-08 00-00-00',
               'Andrii Adminskii', 1);
 
 -- insert USER1 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (2, 2234567890,  'Максим', 'Юзерський', 'Антонович', '1988-04-25 00-00-00', 'user1@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user1', 'user1');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-     VALUES (2, 'PEREYASLIV VAL, 1D','25', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (2, 2);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (2, 1, '952020202', 2);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number, passport_series,
-                              user_id)
-    VALUES (2, '2010-11-11 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 757575, 'НС', 2);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-      VALUES (2, 200.11, 26320130000002, 2);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, account_type, user_id)
-      VALUES (3, 25000.02, 26320130000003, 'Gold', 2);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (2, '1988-04-25 00-00-00', 'Максим', 2234567890, 'Юзерський', 'Антонович', 'user1');
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (2, 'user1@user.ua', 1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user1', 2, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+     VALUES (2, 'PEREYASLIV VAL, 1D','25', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id) VALUES (2, 1, '952020202', 2);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (2, 1, '2010-11-11 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 757575, 'НС', 2);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+      VALUES (2, 200.11, 26320130000002, 1, 2);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, account_type, is_active, person_id)
+      VALUES (3, 25000.02, 26320130000003, 'Gold', 1, 2);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
       VALUES (2, 'VISA', 2222222233334444, 222, '2021-06-30 23-59-59', 1, '2019-06-08 00-00-00',
@@ -79,19 +77,18 @@ REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire
         'Maxim Yuzersky', 3);
 
 -- insert USER2 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (3, 3234567890,  'Антон', 'Юзерський', 'Юрійович', '1988-03-25 00-00-00', 'user2@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user2', 'user2');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-    VALUES (3, 'BOHDANA KHMELNYTSKOHO, 5', '25', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (3, 3);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (3, 1, '683030303', 3);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-    VALUES (3, '2015-11-18 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 247575, 'СЛ', 3);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-    VALUES (4, 22200.11, 26320130000004, 3);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (3, '1988-03-25 00-00-00', 'Антон', 3234567890, 'Юзерський', 'Юрійович', 'user2');
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (3, 'user2@user.ua', 1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user2', 3, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+    VALUES (3, 'BOHDANA KHMELNYTSKOHO, 5', '25', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id) VALUES (3, 1, '683030303', 3);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (3, 1, '2015-11-18 00-00-00', 'Оболонським РВ ГУ ДМСУ в м. Києві', 247575, 'СЛ', 3);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+    VALUES (4, 22200.11, 26320130000004, 1, 3);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
     VALUES (5, 'VISA', 5555222233334444, 111, '2022-06-30 23-59-59', 1, '2020-06-08 00-00-00',
@@ -102,87 +99,76 @@ REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire
         'Anton Yuzersky', 4);
 
 -- insert USER3 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (4, 4234567890,  'Богдан', 'Юзеровський', 'Геннадійович', '1986-03-25 00-00-00', 'user3@user.ua',
-        0, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user3', 'user3');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-     VALUES (4, 'BOHDANA VOLODARSKOHO, 23', '125', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (4, 4);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (4, 1, '504044444', 4);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-    VALUES (4, '2014-10-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 404040, 'СО', 4);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-    VALUES (5, 2220.00, 26320130000005, 4);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (4, '1986-03-25 00-00-00', 'Богдан', 4234567890, 'Юзеровський', 'Геннадійович', 'user3' );
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (4, 'user3@user.ua', 0, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user3', 4, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+     VALUES (4, 'BOHDANA VOLODARSKOHO, 23', '125', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id) VALUES (4, 1, '504044444', 4);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (4, 1, '2014-10-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 404040, 'СО', 4);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+    VALUES (5, 2220.00, 26320130000005, 1, 4);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
     VALUES (7, 'VISA', 7777000044440000, 111, '2022-06-30 23-59-59', 1, '2020-06-08 00-00-00',
         'Bohdan Yuzerovskii', 5);
 
 -- insert USER4 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (5, 5234567890,  'Тимофій', 'Юзеровський', 'Тимофійович', '1996-03-25 00-00-00', 'user4@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user4', 'user4');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-    VALUES (5, 'SHEVCHENKA TARASA, 2', '15', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (5, 5);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (5, 1, '505055555', 5);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-    VALUES (5, '2013-09-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 505050, 'СК', 5);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-    VALUES (6, 52120.40, 26320130000006, 5);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (5, '1996-03-25 00-00-00', 'Тимофій',  5234567890, 'Юзеровський', 'Тимофійович', 'user4');
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (5,'user4@user.ua', 1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user4', 5, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+    VALUES (5, 'SHEVCHENKA TARASA, 2', '15', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id)  VALUES (5, 1, '505055555', 5);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (5, 1, '2013-09-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 505050, 'СК', 5);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+    VALUES (6, 52120.40, 26320130000006, 1, 5);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
     VALUES (8, 'VISA', 8888000044440000, 111, '2022-06-30 23-59-59', 1, '2020-06-08 00-00-00',
         'Tymofii Yuzerovskii', 6);
 
 -- insert USER5 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-    VALUES (6, 6234567890,  'Влада', 'Юзеровська', 'Тимофіївна', '1986-03-25 00-00-00', 'user5@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user5', 'user5');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-    VALUES (6, 'SHEVCHENKA TARASA, 2', '35', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (6, 6);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (6, 1, '506066666', 6);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-    VALUES (6, '2003-08-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 606060, 'СК', 6);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-    VALUES (7, 72120.40, 2632013000007, 6);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (6,'1986-03-25 00-00-00', 'Влада',6234567890, 'Юзеровська', 'Тимофіївна', 'user5');
+REPLACE INTO `users`(user_id, email, is_active, password, user_name, person_id, role_id)
+    VALUES (6, 'user5@user.ua',
+        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user5', 6, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+    VALUES (6, 'SHEVCHENKA TARASA, 2', '35', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id)  VALUES (6, 1, '506066666', 6);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (6, 1, '2003-08-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 606060, 'СК', 6);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+    VALUES (7, 72120.40, 2632013000007, 1, 6);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
     VALUES (9, 'VISA', 9999000044440000, 111, '2022-06-30 23-59-59', 1, '2020-06-08 00-00-00',
         'Vlada Yuzerovska', 7);
 
 -- insert USER6 info
-REPLACE INTO `users` (user_id, id_number_tax_code, first_name, last_name, middle_name, birth_date, email,
-                      is_active, password, secret_word, user_name)
-VALUES (7, 7234567890,  'Анна-Марія', 'Юзеровська', 'Олегівна', '1996-03-25 00-00-00', 'user6@user.ua',
-        1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user6', 'user6');
-REPLACE INTO `address` (address_id, address_line1, address_line2, city, region_id)
-    VALUES (7, 'SHEVCHENKA TARASA, 1', '5', 'Kyiv', 1);
-REPLACE INTO `user_addresses` (user_id, address_id) VALUES (7, 7);
-REPLACE INTO `phone_number` (phone_id, is_primary, phone, user_id) VALUES (7, 1, '507077070', 7);
-REPLACE INTO `passport_data` (passport_id, passport_issue_date, passport_issued_by, passport_number,
-                              passport_series, user_id)
-    VALUES (7, '2003-09-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 707070, 'СК', 7);
-REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, user_id)
-    VALUES (8, 92120.40, 2632013000008, 7);
+REPLACE INTO `person_data` (person_id, birth_date, first_name, id_number_tax_code, last_name, middle_name, secret_word)
+    VALUES (7, '1996-03-25 00-00-00','Анна-Марія', 7234567890, 'Юзеровська', 'Олегівна', 'user6');
+REPLACE INTO `users` (user_id, email, is_active, password, user_name, person_id, role_id)
+VALUES (7, 'user6@user.ua', 1, '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'user6', 7, 2);
+REPLACE INTO `address` (address_id, address_line1, address_line2, city, is_registered, region_id)
+    VALUES (7, 'SHEVCHENKA TARASA, 1', '5', 'Kyiv', 1, 1);
+REPLACE INTO `phone_number` (phone_id, is_primary, phone, person_id)  VALUES (7, 1, '507077070', 7);
+REPLACE INTO `passport_data` (passport_id, is_domestic, passport_issue_date, passport_issued_by,
+                              passport_number, passport_series, person_id)
+    VALUES (7, 1, '2003-09-18 00-00-00', 'Деснянським РВ ГУ ДМСУ в м. Києві', 707070, 'СК', 7);
+REPLACE INTO `bank_accounts` (bank_account_id, account_amount, bank_account_number, is_active, person_id)
+    VALUES (8, 92120.40, 2632013000008, 1, 7);
 REPLACE INTO `credit_card` (credit_card_id, card_name, card_number, cvc2, expire_date, is_active, issue_date,
                             owner_name, bank_account_id)
     VALUES (10, 'VISA', 1010101088880010, 111, '2022-06-30 23-59-59', 1, '2020-06-08 00-00-00',
         'Anna Yuzerovska', 8);
 
--- users' roles
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (1, 1);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (2, 2);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (3, 2);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (4, 2);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (5, 2);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (6, 2);
-REPLACE INTO `user_roles` (user_id, role_id) VALUES (7, 2);
 

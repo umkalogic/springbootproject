@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,6 +21,9 @@ public class Role {
     private int roleId;
 
     @Column(name = "role", columnDefinition = "varchar(255) default 'USER'")
-    private String role;
+    private String roleName;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "roleByRoleId")
+    private List<User> usersByRoleId = new ArrayList<>();
 
 }

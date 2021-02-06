@@ -16,8 +16,8 @@
     <header class="container-fluid">
 	    <div class="header-logo">
 		    <a th:href="@{/admin/home}"><img src="/images/logo.png" class="logo"></a>
-		    <a th:href="@{/admin/home/showFormForUserUpdate/{id}?lang=uk(id=${user.userId})}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
-		    <a th:href="@{/admin/home/showFormForUserUpdate/{id}?lang=en(id=${user.userId})}"><img src="/images/en.svg" alt="English" class="en"/></a>
+		    <a th:href="@{/admin/home/show_form_for_user_update/{id}?lang=uk(id=${user.userId})}" class="margin-left"><img src="/images/ua.svg" alt="Українська" class="ua"/></a>
+		    <a th:href="@{/admin/home/show_form_for_user_update/{id}?lang=en(id=${user.userId})}"><img src="/images/en.svg" alt="English" class="en"/></a>
 	    </div>
     </header>
 	<div class="container-fluid">
@@ -26,25 +26,19 @@
 		<h2 th:text="#{title.user.update}"></h2>
 
 		<div class = "container">
-		<form autocomplete="off" action="#" th:action="@{/admin/update_user/saveUser}"
+		<form autocomplete="off" action="#" th:action="@{/admin/update_user/save_user}"
 			  th:object="${user}" method="POST" role="form">
 			
 			<input type="hidden" th:field="*{userId}">
 			<input type="text" th:field="*{userName}" class="form-control mb-4 col-4">
 			<label th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
 				   class="validation-message"></label>
-			<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
-			<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-					class="validation-message"></label>
-			<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
-			<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-					class="validation-message"></label>
 			<input type="text" th:field="*{email}" class="form-control mb-4 col-4">
 			<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
 					class="validation-message"></label>
 			<br/>
-			<div class="form-control mb-4 col-4" th:if="*{userName} != ${activeUserName}">
-			  <label th:text="#{user.enabled} + '? '"></label>
+			<div class="form-control mb-4 col-4">
+			  <label th:text="#{user.enabled} + '?  '"></label>
 			  <input type="checkbox" th:field="*{isActive}">
 			</div>
 			<button type="submit" class="btn btn-info col-2" th:text="#{user.update}"></button>

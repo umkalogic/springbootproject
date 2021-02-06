@@ -31,8 +31,11 @@ public class PassportData {
     @Basic@Column(name = "passport_issued_by", nullable = false)
     private String passportIssuedBy;
 
+    @Basic@Column(name = "is_domestic", nullable = false, columnDefinition = "tinyint default 1")
+    private Boolean isDomestic;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    private User userByUserId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id", nullable = false)
+    private Person personByPersonId;
 
 }
