@@ -51,7 +51,7 @@
                 <label th:if="${#fields.hasErrors('paymentAmount')}" th:errors="*{paymentAmount}"
                        class="validation-message"></label>
                 <br>
-                <button type="submit" class="btn btn-info col-2" th:text="#{payment.send}"></button>
+                <button type="submit" class="btn btn-info col-2" th:text="#{payment.create}"></button>
                 <br>
                 <br>
                 <h2 th:if="${errorMessage}"><span class="text-danger" th:utext="#{error.message}"></span></h2>

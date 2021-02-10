@@ -193,7 +193,7 @@ public class BankAccountService {
                 bankAccount.setIsActive(false);
             }
             bankAccountRepository.save(bankAccount);
-             return "Update successful";
+            return "Update successful";
         } catch (BankTransactionException ex) {
             // TODO log exception
             return ex.getMessage();
