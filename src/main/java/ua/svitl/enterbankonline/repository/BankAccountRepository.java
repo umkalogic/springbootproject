@@ -6,21 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ua.svitl.enterbankonline.model.BankAccount;
 import ua.svitl.enterbankonline.model.Person;
 
-import java.math.BigInteger;
-import java.util.List;
+import java.util.Optional;
 
 
 public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
-    List<BankAccount> findBankAccountsByAccountTypeOrderByAccountTypeAsc(String accountType);
-    List<BankAccount> findBankAccountsByAccountTypeOrderByAccountTypeDesc(String accountType);
-    List<BankAccount> findBankAccountsByAccountAmountOrderByAccountAmountAsc(Double amount);
-    List<BankAccount> findBankAccountsByAccountAmountOrderByAccountAmountDesc(Double amount);
-    List<BankAccount> findBankAccountsByBankAccountNumberOrderByBankAccountNumberAsc(BigInteger accountNumber);
-    List<BankAccount> findBankAccountsByBankAccountNumberOrderByBankAccountNumberDesc(BigInteger accountNumber);
-    List<BankAccount> findBankAccountsByPersonByPersonId(Person person);
-    List<BankAccount> findBankAccountsByPersonByPersonIdAndCurrency(Person person, String currency);
-    BankAccount findBankAccountByBankAccountNumberEndsWith(BigInteger accountNumberEnd);
-    BankAccount findBankAccountByBankAccountId(int accountId);
-    List<BankAccount> findBankAccountsByIsActive(Boolean isActive);
+    Optional<BankAccount> findBankAccountByBankAccountId(int accountId);
     Page<BankAccount> findAllByPersonByPersonId(Person person, Pageable pageable);
+    Optional<BankAccount> findBankAccountByBankAccountNumber(String accountNumber);
 }

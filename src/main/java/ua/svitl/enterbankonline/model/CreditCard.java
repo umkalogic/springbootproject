@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.svitl.enterbankonline.model.constants.EntityConstants;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -23,7 +25,7 @@ public class CreditCard {
 
     @Basic@Column(name = "card_number", nullable = false, length = 16, unique = true,
         columnDefinition = "bigint(16)")
-    @NotEmpty(message = "{card.number.not.empty}")
+    @DecimalMin(value = "1", message = "{bank.account.number.format}")
     private BigInteger cardNumber;
 
     @Basic@Column(name = "issue_date", nullable = false,
@@ -51,5 +53,5 @@ public class CreditCard {
 
     @ManyToOne
     @JoinColumn(name = "bank_account_id", referencedColumnName = "bank_account_id", nullable = false)
-    private BankAccount bankAccountByBankAccountId;
+    private BankAccount bankAccount;
 }

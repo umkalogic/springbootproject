@@ -1,20 +1,17 @@
 package ua.svitl.enterbankonline.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.svitl.enterbankonline.model.Person;
 import ua.svitl.enterbankonline.model.Role;
 import ua.svitl.enterbankonline.model.User;
 import ua.svitl.enterbankonline.model.dto.UserPersonDataDto;
-import ua.svitl.enterbankonline.repository.PersonRepository;
 import ua.svitl.enterbankonline.repository.RoleRepository;
 import ua.svitl.enterbankonline.repository.UserRepository;
+import ua.svitl.enterbankonline.utilities.UserManagementExceptions;
 
 import javax.transaction.Transactional;
 
@@ -32,11 +29,35 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
    }
 
-    public User findUserByUserName(String userName) {
+    User findUserByUserName(String userName) {
         return userRepository.findUserByUserName(userName)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: no such username"));
+                .orElseThrow(() -> new UserManagementExceptions("User not found: no such username"));
     }
 
+    private User findUserById(int id) {
+        return userRepository.findUserByUserId(id)
+                .orElseThrow(() -> new UserManagementExceptions("User not found: no such user id"));
+    }
+
+    public User getUserByUserId(int id) {
+        try {
+            return findUserById(id);
+        } catch (UserManagementExceptions ex) {
+            // TODO log exception
+            return new User();
+        }
+    }
+
+    public User getUserByName(String userName) {
+        try {
+            return findUserByUserName(userName);
+        } catch (UserManagementExceptions ex) {
+            // TODO log exception
+            return new User();
+        }
+    }
+
+    @Transactional
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setIsActive(true);
@@ -52,7 +73,7 @@ public class UserService {
     @Transactional
     public User updateUser(final User userFromPost) {
         User existingUser = userRepository.findUserByUserId(userFromPost.getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: no such user id"));;
+                .orElseThrow(() -> new UserManagementExceptions("User not found: no such user id"));;
         existingUser.setUserName(userFromPost.getUserName());
         existingUser.setEmail(userFromPost.getEmail());
         existingUser.setIsActive(userFromPost.getIsActive());
@@ -60,16 +81,16 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUserActive(final User user, Boolean activeStatus) {
-        User existingUser = userRepository.findUserByUserId(user.getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: no user to activate"));;
-        existingUser.setIsActive(activeStatus);
-        return userRepository.save(existingUser);
-    }
-
-    public User getUserById(int id) {
-        return userRepository.findUserByUserId(id)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: no such user id"));
+    public User updateUserActive(int id, Boolean activeStatus) {
+        try {
+            User existingUser = userRepository.findUserByUserId(id)
+                    .orElseThrow(() -> new UserManagementExceptions("User not found: no user to activate"));
+            existingUser.setIsActive(activeStatus);
+            return userRepository.save(existingUser);
+        } catch (UserManagementExceptions ex) {
+            // TODO log exception
+            return new User();
+        }
     }
 
 

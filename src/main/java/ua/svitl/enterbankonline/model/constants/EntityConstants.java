@@ -1,4 +1,4 @@
-package ua.svitl.enterbankonline.model;
+package ua.svitl.enterbankonline.model.constants;
 
 public class EntityConstants {
     public static final int BANK_MFO = 320_130;

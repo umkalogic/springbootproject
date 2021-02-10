@@ -1,6 +1,5 @@
 package ua.svitl.enterbankonline.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.svitl.enterbankonline.model.PassportData;
@@ -10,6 +9,7 @@ import ua.svitl.enterbankonline.repository.AddressRepository;
 import ua.svitl.enterbankonline.repository.PassportDataRepository;
 import ua.svitl.enterbankonline.repository.PersonRepository;
 import ua.svitl.enterbankonline.repository.PhoneNumberRepository;
+import ua.svitl.enterbankonline.utilities.UserManagementExceptions;
 
 import java.math.BigInteger;
 
@@ -43,10 +43,18 @@ public class PersonService {
                 .orElseThrow(() -> new UsernameNotFoundException("Person data not found: no such person id"));
     }
 
-    public Person getPersonByPersonUsersContains(User user) {
+    private Person getPersonByPersonUsersContains(User user) {
         return personRepository.findPersonByPersonUsersContains(user)
                 .orElseThrow(() -> new UsernameNotFoundException("Person not found: no such user"));
     }
 
+    public Person getPersonByUser(User user) {
+        try {
+            return getPersonByPersonUsersContains(user);
+        } catch (UserManagementExceptions ex) {
+            //TODO log exception
+            return new Person();
+        }
+    }
 
 }

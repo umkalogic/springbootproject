@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration Form</title>
+    <title>Error page</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,6 +26,7 @@
 <div class="container">
     <h1 th:text="#{error.occured}"></h1>
     <p th:text="#{error.hasoccured}"></p>
+    <p th:if="${stringInfo}" th:utext="${stringInfo}"></p>
 </div>
 
 <script th:src="@{static/js/jquery-3.2.1.slim.min.js}"></script>

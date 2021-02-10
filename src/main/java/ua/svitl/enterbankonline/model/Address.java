@@ -31,7 +31,7 @@ public class Address {
     private String addressLine2;
 
     @Column(name = "is_registered", columnDefinition = "tinyint default 1")
-    private boolean is_registered;
+    private boolean isRegistered;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", referencedColumnName = "region_id", nullable = false)

@@ -1,16 +1,14 @@
 package ua.svitl.enterbankonline.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.UniqueElements;
+import org.hibernate.validator.constraints.Length;
+import ua.svitl.enterbankonline.model.constants.EntityConstants;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +24,10 @@ public class BankAccount {
     private int bankAccountId;
 
     @Basic@Column(name = "bank_account_number", unique = true, nullable = false, length = 14,
-            columnDefinition = "bigint(14) default " + EntityConstants.DEFAULT_BANK_ACCOUNT + "")
-    @NotEmpty(message = "{bank.account.number.format}")
-    private BigInteger bankAccountNumber;
+            columnDefinition = "varchar(14) default " + EntityConstants.DEFAULT_BANK_ACCOUNT + "")
+    @Length(min = 14, message = "{bank.account.number.format}")
+    @NotEmpty(message = "{bank.account.number.notnull}")
+    private String bankAccountNumber;
 
     @Basic@Column(name = "account_type", nullable = false,
             columnDefinition = "varchar(255) default '" + EntityConstants.DEFAULT_BANK_ACCOUNT_TYPE + "'")
@@ -49,16 +48,29 @@ public class BankAccount {
     private Boolean enableRequest;
 
     @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "bankAccountByBankAccountId", orphanRemoval = true)
+            mappedBy = "bankAccount", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Payment> bankAccountPayments = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "bankAccountByBankAccountId", orphanRemoval = true)
+            mappedBy = "bankAccount", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<CreditCard> bankAccountCreditCards = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id", referencedColumnName = "person_id", nullable = false)
     private Person personByPersonId;
+
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "bankAccountId=" + bankAccountId +
+                ", bankAccountNumber='" + bankAccountNumber + '\'' +
+                ", accountType='" + accountType + '\'' +
+                ", accountAmount=" + accountAmount +
+                ", currency='" + currency + '\'' +
+                ", isActive=" + isActive +
+                ", enableRequest=" + enableRequest +
+                '}';
+    }
 }

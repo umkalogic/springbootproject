@@ -29,3 +29,17 @@ span.page-link:not(:disabled):not(.disabled) {
 .page-link{
     display: inline;
 }
+.cards{
+    display: inline-block;
+    padding: .25rem .5rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #17a2b8;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #17a2b8;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}

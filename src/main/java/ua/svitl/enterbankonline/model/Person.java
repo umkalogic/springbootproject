@@ -10,6 +10,7 @@ import ua.svitl.enterbankonline.model.validation.groups.AdvancedUserInfo;
 import ua.svitl.enterbankonline.model.validation.groups.BasicUserInfo;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
@@ -32,8 +33,7 @@ public class Person {
     @Basic
     @Column(name = "id_number_tax_code", length = 10, nullable = false, unique = true,
             columnDefinition = "bigint(10)")
-    @Length(min = 10, message = "{tax.number.min}")
-    @NotNull(groups = AdvancedUserInfo.class, message = "{tax.number.notnull}")
+    @DecimalMin(groups = AdvancedUserInfo.class, value = "26000000000000", message = "{tax.number.notnull}")
     private BigInteger idNumberTaxCode;
 
     @Basic@Column(name = "last_name", nullable = false)
@@ -51,7 +51,6 @@ public class Person {
 
     @Basic@Column(name = "birth_date", nullable = false)
     @DateTimeFormat
-    @NotNull(groups = AdvancedUserInfo.class, message = "{user.birth.date}")
     private LocalDateTime birthDate;
 
     @Basic@Column(name = "secret_word", nullable = false)

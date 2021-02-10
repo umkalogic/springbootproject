@@ -41,7 +41,10 @@ public class UserManagementController {
 
     @GetMapping(value={"/admin/home/show_form_for_user_update/{id}", "/admin/update_user/{id}"})
     public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
-        User user = userService.getUserById(id);
+        User user = userService.getUserByUserId(id);
+        if (id != user.getUserId()) {
+            model.addAttribute("stringInfo", "User not found: wrong id");
+        }
         model.addAttribute("user", user);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("activeUserName", auth.getName());
@@ -63,14 +66,20 @@ public class UserManagementController {
     }
 
     @GetMapping(value="/admin/home/enable/{id}")
-    public String enableUser(@PathVariable(value = "id") int id){
-        userService.updateUserActive(userService.getUserById(id), true);
+    public String enableUser(@PathVariable(value = "id") int id, Model model){
+        User user = userService.updateUserActive(id, true);
+        if (id != user.getUserId()) {
+            model.addAttribute("stringInfo", "User not found: wrong id");
+        }
         return "redirect:/admin/home";
     }
 
     @GetMapping(value="/admin/home/disable/{id}")
     public String disableUser(@PathVariable(value = "id") int id, Model model){
-        userService.updateUserActive(userService.getUserById(id), false);
+        User user = userService.updateUserActive(id, false);
+        if (id != user.getUserId()) {
+            model.addAttribute("stringInfo", "User not found: wrong id");
+        }
         return "redirect:/admin/home";
     }
 

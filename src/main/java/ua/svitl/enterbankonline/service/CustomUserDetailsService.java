@@ -1,6 +1,5 @@
 package ua.svitl.enterbankonline.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +9,8 @@ import ua.svitl.enterbankonline.model.Role;
 import ua.svitl.enterbankonline.model.User;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

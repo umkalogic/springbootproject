@@ -1,6 +1,5 @@
 package ua.svitl.enterbankonline.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +21,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -70,10 +68,7 @@ public class LoginController {
                                 @RequestParam("sortfield") String sortField,
                                 @RequestParam("sortdir") String sortDir,
                                 Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        Person person = personService.getPersonByPersonUsersContains(user);
-        model.addAttribute("activeUserName", person.getLastName() + " " + person.getFirstName());
+        Person person = setActiveUserName(model);
         model.addAttribute("person", person);
 
         int pageSize = ControllerConstants.PAGE_SIZE;
@@ -122,4 +117,11 @@ public class LoginController {
 
     }
 
+    private Person setActiveUserName(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByName(auth.getName());
+        Person person = personService.getPersonByUser(user);
+        model.addAttribute("activeUserName", person.getLastName() + ' ' + person.getFirstName());
+        return person;
+    }
 }

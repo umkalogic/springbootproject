@@ -28,6 +28,7 @@
 
     <div class="container-fluid" style="margin-top:40px;">
         <span th:text="#{text.welcome} + ' '"></span><span th:utext="${activeUserName}"></span>
+        <hr>
     </div>
 
     <div class="container-fluid">
@@ -48,6 +49,7 @@
                 <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortfield=accountype&sortdir=' + ${reverseSortDir}}"
                        th:text="#{account.type}"></a>
                 </th>
+                <th th:text="#{account.showAccountCreditCards}"></th>
                 <th><a th:href="@{'/user/home/page/' + ${currentPage} + '?sortfield=accountamount&sortdir=' + ${reverseSortDir}}"
                        th:text="#{account.amount}"></a>
                 </th>
@@ -56,22 +58,33 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="account : ${listBankAccounts}">
-                <td th:text="${account.bankAccountNumber}"></td>
-                <td th:text="${account.accountType}"></td>
-                <td th:text="${account.accountAmount} + ' ' + ${account.currency}" style="text-align: right;"></td>
-                <td th:text="${account.isActive} ? #{account.enabled} : #{account.disabled}"></td>
+            <tr th:each="mapItem : ${mapAccountCards}">
+                <td th:text="${mapItem.key.bankAccountNumber}"></td>
+                <td th:text="${mapItem.key.accountType}"></td>
                 <td>
-                    <a th:href="@{/user/home/showAccountCreditCards/{id}(id=${account.bankAccountId})}" class="btn btn-success"
-                       th:text="#{account.showAccountCreditCards}"></a>
-                    <a th:href="@{/user/home/showFormForPayment/{id}(id=${account.bankAccountId})}" class="btn btn-warning"
+                    <div th:each="card : ${mapItem.value}">
+                        <span th:text="${#numbers.formatInteger(card.cardNumber, 16, 'WHITESPACE')}" class="cards"></span>
+                        <span th:text="' ' + ${card.cardName}"></span>
+                        <span th:text="' ' + ${#temporals.format(card.expireDate,'MM/yy')} + ', '"></span>
+                        <span th:text="${card.ownerName}"></span>
+                    </div>
+                </td>
+                <td th:text="${mapItem.key.accountAmount} + ' ' + ${mapItem.key.currency}" style="text-align: right;"></td>
+                <td th:text="${mapItem.key.isActive} ? #{account.enabled} : #{account.disabled}"></td>
+                <td>
+                    <a th:if="${mapItem.key.isActive} and !${mapItem.key.enableRequest}"
+                       th:href="@{/user/home/show_form_for_payment/{id}(id=${mapItem.key.bankAccountId})}"
+                       class="btn btn-warning"
                        th:text="#{account.payment}"></a>
-                    <a th:if="${account.isActive}" th:text="#{account.disable}"
-                       th:href="@{/user/home/deactivateAccount/{id}(id=${account.bankAccountId})}"
+                    <a th:if="${mapItem.key.isActive}" th:text="#{account.disable}"
+                       th:href="@{/user/home/disable_account/{id}(id=${mapItem.key.bankAccountId})}"
+                       th:data-confirm-delete="|#{message.disable.bank.account}|"
+                       onclick="return confirm(this.getAttribute('data-confirm-delete'))"
                        class="btn btn-danger"></a>
-                    <a th:if="!${account.isActive}" th:text="#{account.enablerequest}"
-                       th:href="@{/user/home/enableAccountRequest/{id}(id=${account.bankAccountId})}"
+                    <a th:if="!${mapItem.key.isActive} and !${mapItem.key.enableRequest}" th:text="#{account.enablerequest}"
+                       th:href="@{/user/home/enable_account_request/{id}(id=${mapItem.key.bankAccountId})}"
                        class="btn btn-secondary"></a>
+                    <span th:if="${mapItem.key.enableRequest}" th:text="#{account.request.sent}" class="btn btn-info"></span>
                 </td>
             </tr>
             </tbody>

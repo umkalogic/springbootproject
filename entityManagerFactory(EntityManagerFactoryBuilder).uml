@@ -3,73 +3,73 @@
   <ID>Persistence</ID>
   <OriginalElement>JavaeeElement:/e86a79f0/entityManagerFactory/springbootproject/jpa/JPA/PersistenceModel</OriginalElement>
   <nodes>
-    <node x="424.75" y="170.0">BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java</node>
-    <node x="432.75" y="0.0">Payment#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Payment.java</node>
-    <node x="186.0" y="664.0">PassportData#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PassportData.java</node>
-    <node x="225.75" y="22.0">UkraineRegion#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/UkraineRegion.java</node>
-    <node x="41.75" y="203.0">PhoneNumber#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PhoneNumber.java</node>
-    <node x="495.5" y="406.0">CreditCard#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/CreditCard.java</node>
-    <node x="0.0" y="472.0">Role#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Role.java</node>
-    <node x="241.75" y="192.0">Address#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Address.java</node>
-    <node x="148.0" y="417.0">Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java</node>
-    <node x="31.5" y="675.0">User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java</node>
+    <node x="857.35" y="0.0">BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java</node>
+    <node x="1054.75" y="269.0">Payment#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Payment.java</node>
+    <node x="228.25" y="11.0">PassportData#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PassportData.java</node>
+    <node x="0.0" y="302.0">UkraineRegion#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/UkraineRegion.java</node>
+    <node x="472.25" y="33.0">PhoneNumber#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PhoneNumber.java</node>
+    <node x="853.75" y="236.0">CreditCard#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/CreditCard.java</node>
+    <node x="705.75" y="302.0">Role#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Role.java</node>
+    <node x="55.25" y="22.0">Address#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Address.java</node>
+    <node x="455.0" y="247.0">Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java</node>
+    <node x="672.25" y="22.0">User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java</node>
   </nodes>
   <notes />
   <edges>
     <edge source="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java" target="Address#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Address.java">
-      <point x="25.0" y="-93.0" />
-      <point x="273.0" y="376.0" />
-      <point x="319.25" y="376.0" />
-      <point x="0.0" y="71.0" />
+      <point x="-80.0" y="-93.0" />
+      <point x="475.0" y="216.0" />
+      <point x="170.0" y="216.0" />
+      <point x="38.25" y="71.0" />
     </edge>
-    <edge source="Address#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Address.java" target="UkraineRegion#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/UkraineRegion.java">
-      <point x="0.0" y="-71.0" />
-      <point x="0.0" y="38.0" />
+    <edge source="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java" target="PassportData#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PassportData.java">
+      <point x="-40.0" y="-93.0" />
+      <point x="515.0" y="206.0" />
+      <point x="340.25" y="206.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="Role#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Role.java" target="User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java">
+      <point x="0.0" y="-38.0" />
+      <point x="32.5" y="71.0" />
     </edge>
     <edge source="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java" target="PhoneNumber#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PhoneNumber.java">
-      <point x="-75.0" y="-93.0" />
-      <point x="173.0" y="386.0" />
-      <point x="86.75" y="386.0" />
-      <point x="-45.0" y="60.0" />
-    </edge>
-    <edge source="User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java" target="Role#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Role.java">
-      <point x="-32.5" y="-71.0" />
-      <point x="0.0" y="38.0" />
-    </edge>
-    <edge source="PassportData#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PassportData.java" target="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java">
-      <point x="0.0" y="-82.0" />
-      <point x="50.0" y="93.0" />
-    </edge>
-    <edge source="PhoneNumber#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PhoneNumber.java" target="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java">
-      <point x="45.0" y="60.0" />
-      <point x="176.75" y="376.0" />
-      <point x="223.0" y="376.0" />
-      <point x="-25.0" y="-93.0" />
-    </edge>
-    <edge source="User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java" target="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java">
-      <point x="32.5" y="-71.0" />
-      <point x="129.0" y="639.0" />
-      <point x="198.0" y="639.0" />
-      <point x="-50.0" y="93.0" />
-    </edge>
-    <edge source="BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java" target="Payment#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Payment.java">
       <point x="0.0" y="-93.0" />
+      <point x="555.0" y="216.0" />
+      <point x="562.25" y="216.0" />
       <point x="0.0" y="60.0" />
+    </edge>
+    <edge source="UkraineRegion#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/UkraineRegion.java" target="Address#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Address.java">
+      <point x="0.0" y="-38.0" />
+      <point x="-38.25" y="71.0" />
+    </edge>
+    <edge source="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java" target="User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java">
+      <point x="40.0" y="-93.0" />
+      <point x="595.0" y="206.0" />
+      <point x="704.75" y="206.0" />
+      <point x="-32.5" y="71.0" />
+    </edge>
+    <edge source="Payment#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Payment.java" target="BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java">
+      <point x="0.0" y="-71.0" />
+      <point x="1153.25" y="216.0" />
+      <point x="1017.35" y="216.0" />
+      <point x="64.0" y="93.0" />
     </edge>
     <edge source="CreditCard#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/CreditCard.java" target="BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java">
       <point x="0.0" y="-104.0" />
-      <point x="53.75" y="93.0" />
+      <point x="944.25" y="216.0" />
+      <point x="953.35" y="216.0" />
+      <point x="0.0" y="93.0" />
     </edge>
     <edge source="Person#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/Person.java" target="BankAccount#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/BankAccount.java">
-      <point x="75.0" y="-93.0" />
-      <point x="323.0" y="386.0" />
-      <point x="478.5" y="386.0" />
-      <point x="-53.75" y="93.0" />
+      <point x="80.0" y="-93.0" />
+      <point x="635.0" y="216.0" />
+      <point x="889.35" y="216.0" />
+      <point x="-64.0" y="93.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6407369498464688" x="478.5" y="414.0" />
+  <settings layout="Hierarchic Group" zoom="0.9168958742632612" x="620.237055641422" y="200.1996672212978" />
   <SelectedNodes>
-    <node>User#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/User.java</node>
+    <node>PhoneNumber#file://C:/projects/Java/demoproject/demoproject2/springbootproject/src/main/java/ua/svitl/enterbankonline/model/PhoneNumber.java</node>
   </SelectedNodes>
   <Categories>
     <Category>Properties</Category>
